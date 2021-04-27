@@ -30,18 +30,14 @@ public class Model
 	 */
 	public void cercaSequenza(Nerc nerc, int maxYears, int maxHours)
 	{
-		Set<Blackout> blackouts = new HashSet<>(dao.getBlackoutByNerc(nerc));
+		Set<Blackout> blackouts = new HashSet<>();
+		for (Blackout b : dao.getBlackoutByNerc(nerc))
+			if(Duration.between(b.getInizio(), b.getFine()).toMinutes() <= maxHours*60)
+				blackouts.add(b);
+		
 		Set<Blackout> parziale = new HashSet<>();
 		
 		this.cerca(parziale, blackouts);
-		
-		for (Blackout b : blackouts)
-		{
-			if(Duration.between(b.getInizio(), b.getFine()).toMinutes() <= maxHours*60)
-			{
-				parziale.add(b);
-			}
-		}
 		
 		System.out.println(parziale.size());
 		System.out.println(parziale);
@@ -49,6 +45,6 @@ public class Model
 
 	private void cerca(Set<Blackout> parziale,Set<Blackout> blackouts)
 	{
-		 
+		
 	}
 }
