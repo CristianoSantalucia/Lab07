@@ -2,23 +2,27 @@ package it.polito.tdp.poweroutages.DAO;
 
 import java.sql.Connection;
 
-public class TestPowerOutagesDAO {
+import it.polito.tdp.poweroutages.model.Nerc;
 
-	public static void main(String[] args) {
-		
-		try {
+public class TestPowerOutagesDAO
+{
+
+	public static void main(String[] args)
+	{
+		try
+		{
 			Connection connection = ConnectDB.getConnection();
 			connection.close();
 			System.out.println("Connection Test PASSED");
 			
-			PowerOutageDAO dao = new PowerOutageDAO() ;
-			
-			System.out.println(dao.getNercList()) ;
+			PowerOutageDAO dao = new PowerOutageDAO();
 
-		} catch (Exception e) {
+			System.out.println(dao.getBlackoutByNerc(new Nerc(8, null)));
+
+		}
+		catch (Exception e)
+		{
 			System.err.println("Test FAILED");
 		}
-
 	}
-
 }
