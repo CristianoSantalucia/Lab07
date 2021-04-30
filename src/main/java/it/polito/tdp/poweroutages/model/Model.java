@@ -50,6 +50,7 @@ public class Model
 		//
 		for (Blackout b : blackouts)
 		{
+			
 			parziale.add(b);
 			if (!parziale.contains(b) && valida(parziale))
 //				this.cerca(parziale);
